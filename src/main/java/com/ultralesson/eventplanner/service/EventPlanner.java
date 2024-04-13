@@ -43,9 +43,12 @@ public class EventPlanner {
 
     public void addAttendeeToEvent(Event event, Attendee attendee) {
         if(event == null || attendee == null){
-            throw new IllegalArgumentException("Invalid event");
+            throw new IllegalArgumentException("Invalid event or attendee");
         }
-        
+        if (!events.contains(event)) {
+            throw new IllegalArgumentException("Event does not exist");
+        }
+        event.addAttendee(attendee);
     }
 
     public void updateEvent(Event updatedEvent) {
