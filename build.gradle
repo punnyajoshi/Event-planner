@@ -1,0 +1,23 @@
+plugins {
+    id 'java'
+}
+
+group 'com.ultralesson'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:30.1-jre'
+    testImplementation 'org.testng:testng:7.4.0'
+
+}
+
+test {
+    useTestNG(){
+        suites 'src/test/java/com/ultralesson/eventplanner/testng.xml'
+    }
+
+}
