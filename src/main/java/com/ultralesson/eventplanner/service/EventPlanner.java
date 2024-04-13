@@ -8,6 +8,7 @@ import com.ultralesson.eventplanner.model.Venue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class EventPlanner {
     private List<Event> events;
@@ -42,11 +43,10 @@ public class EventPlanner {
     }
 
     public void addAttendeeToEvent(Event event, Attendee attendee) {
-        if(event == null || attendee == null){
-            throw new IllegalArgumentException("Invalid event or attendee");
-        }
-        if (!events.contains(event)) {
-            throw new IllegalArgumentException("Event does not exist");
+        Objects.requireNonNull(event, "Event cannot be null");
+        Objects.requireNonNull(attendee, "Attendee cannot be null");
+        if(!events.contains(event)) {
+            throw new IllegalArgumentException("Event does not exist in the planner");
         }
         event.addAttendee(attendee);
     }

@@ -41,10 +41,8 @@ public class AttendeeManagementTest {
     public void testAddingAttendeeToNonExistentEvent() {
         EventPlanner eventPlanner = new EventPlanner();
         Attendee attendee = new Attendee(4, "Alexa", "alexa@example.com");
-        Event nonExistentEvent = new Event(11, "Non Existent Event", "This event does not exist", null); // deliberately setting venue as null
-
-        eventPlanner.addEvent(nonExistentEvent); //might be needed to trigger a specific exception here
-        eventPlanner.addAttendee(attendee); // Expecting an exception due to non-existent event
+        Event nonExistentEvent = new Event(11, "Non Existent Event", "This event does not exist", new Venue(1, "Dummy", "Address", 100));
+        eventPlanner.addAttendeeToEvent(nonExistentEvent, attendee);
     }
 
     @Test(expectedExceptions = IllegalArgumentException.class)
