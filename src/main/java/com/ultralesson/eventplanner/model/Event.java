@@ -11,7 +11,7 @@ public class Event {
 
     private Venue venue;
 
-    public Event(int id, String testEvent, String description, Venue dummyVenue) {
+    public Event(int id, String testEvent, String description, Venue actualVenue) {
         if (name == null) {
             throw new IllegalArgumentException("Event name cannot be null.");
         }
