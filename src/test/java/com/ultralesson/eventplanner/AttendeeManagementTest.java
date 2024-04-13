@@ -7,6 +7,7 @@ import com.ultralesson.eventplanner.service.EventPlanner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+
 public class AttendeeManagementTest {
     @Test
     public void testAddingAttendeeToEvent()
@@ -51,6 +52,38 @@ public class AttendeeManagementTest {
         Event event = new Event(1, "Test Event", "Test Description", new Venue(1, "Test Venue", "Test Address", 100));
         Attendee invalidAttendee = new Attendee(10, "Test Name", ""); // Empty email
         event.addAttendee(invalidAttendee);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionWhenAddingAttendeeToNonExistentEvent() {
+        EventPlanner eventPlanner = new EventPlanner();
+        Attendee attendee = new Attendee(1, "Jane Doe", "jane.doe@example.com");
+        Event nonExistentEvent = new Event(100, "Nonexistent Event", "An event that does not exist", null);
+
+        // This should throw an exception because the event does not exist within the event planner.
+        eventPlanner.addAttendeeToEvent(nonExistentEvent, attendee);
+    }
+
+    public void testSafeRemoveAttendeeFromEvent() {
+        EventPlanner eventPlanner = new EventPlanner();
+        Event event = new Event(1, "Event", "Description", new Venue(1, "Venue", "Address", 100));
+        Attendee attendee = new Attendee(1, "John Doe", "john.doe@example.com");
+
+        event.addAttendee(attendee);
+        int initialAttendeeCount = event.getAttendees().size();
+
+        // Try to remove an attendee that does not exist in the event.
+        Attendee nonExistentAttendee = new Attendee(2, "Jane Doe", "jane.doe@example.com");
+        event.removeAttendee(nonExistentAttendee);
+
+        Assert.assertEquals(event.getAttendees().size(), initialAttendeeCount, "Attendee list size should remain unchanged");
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowExceptionForMissingEventDetails() {
+        EventPlanner eventPlanner = new EventPlanner();
+        Event event = new Event(1, "", "Description", new Venue(1, "Venue", "Address", 100));
+        eventPlanner.addEvent(event);
     }
 
 }

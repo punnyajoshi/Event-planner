@@ -34,10 +34,18 @@ public class EventPlanner {
         attendees.add(attendee);
     }
 
+
     public void scheduleEvent(Event event, Venue venue, LocalDateTime startTime, LocalDateTime endTime) {
         int scheduleId = schedules.size() + 1;
         Schedule schedule = new Schedule(scheduleId, event, venue, startTime, endTime);
         schedules.add(schedule);
+    }
+
+    public void addAttendeeToEvent(Event event, Attendee attendee) {
+        if(event == null || attendee == null){
+            throw new IllegalArgumentException("Invalid event");
+        }
+        
     }
 
     public void updateEvent(Event updatedEvent) {
