@@ -7,8 +7,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class AttendeeTest {
-    private Attendee attendee;
-
 
     @Test(groups = {"creation"})
     public void testAttendeeCreation() {

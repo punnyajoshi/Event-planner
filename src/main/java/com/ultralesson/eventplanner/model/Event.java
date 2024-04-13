@@ -11,15 +11,7 @@ public class Event {
 
     private Venue venue;
 
-    public Event(int id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.attendees = new ArrayList<>();
-        this.venue = venue;
-    }
-
-    public Event(int id, String testEvent, String description, Venue venue) {
+    public Event(int id, String testEvent, String description, Venue dummyVenue) {
         if (name == null) {
             throw new IllegalArgumentException("Event name cannot be null.");
         }
@@ -30,7 +22,6 @@ public class Event {
         this.venue = venue;
 
     }
-
 
     public int getId() {
         return id;

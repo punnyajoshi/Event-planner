@@ -8,7 +8,6 @@ import com.ultralesson.eventplanner.service.EventPlanner;
 import com.ultralesson.eventplanner.service.InvitationSender;
 import com.ultralesson.eventplanner.service.ScheduleFinder;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,8 +17,8 @@ public class Main {
         Venue venue1 = new Venue(1, "Conference Center", "Newyork Central", 500);
         Venue venue2 = new Venue(2, "Hotel Ballroom", "Washington DC", 200);
 
-        Event event1 = new Event(1, "Tech Conference", "A conference about technology", venue1);
-        Event event2 = new Event(2, "Wedding Reception", "A lovely wedding reception", venue2);
+        Event event1 = new Event(1, "Tech Conference", "A conference about technology", dummyVenue);
+        Event event2 = new Event(2, "Wedding Reception", "A lovely wedding reception", dummyVenue);
 
         Attendee attendee1 = new Attendee(1, "John Doe", "john.doe@example.com");
         Attendee attendee2 = new Attendee(2, "Jane Smith", "jane.smith@example.com");
