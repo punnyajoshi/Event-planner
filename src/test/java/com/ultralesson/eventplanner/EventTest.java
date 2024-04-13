@@ -16,12 +16,14 @@ import static org.testng.Assert.assertEquals;
 
 @Test
 public class EventTest {
+    
+    Venue venue;
+    Event event;
+    Venue actualVenue = event.getVenue();
 
-    Venue actualVenue;
     @Test(groups = {"creation"})
     public void testEventCreation() {
-        Venue venue;
-        Event event;
+
 
         new Event(1, "Wedding", "A beautiful wedding ceremony.", actualVenue);
         event = new Event(1, "Sample Event", "Sample Description", actualVenue);
@@ -67,6 +69,12 @@ public class EventTest {
 
         // Verify that the event is added to the list
         Assert.assertTrue(mockEventDB.contains(event));
+        Event retrievedEvent = mockEventDB.get(0);
+        Assert.assertEquals(retrievedEvent.getId(), event.getId());
+        Assert.assertEquals(retrievedEvent.getName(), event.getName());
+        Assert.assertEquals(retrievedEvent.getDescription(), event.getDescription());
+        Assert.assertEquals(retrievedEvent.getVenue(), event.getVenue());
+
     }
 
     @Test
