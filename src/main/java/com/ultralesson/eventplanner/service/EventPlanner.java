@@ -74,4 +74,3 @@ public class EventPlanner {
         return schedules;
     }
 }
-

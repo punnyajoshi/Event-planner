@@ -1,6 +1,5 @@
 package com.ultralesson.eventplanner.model;
 
-
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,8 +10,8 @@ public class Attendee {
     private String email;
 
     public Attendee(int id, String name, String email) {
-        if (!isValidEmail(email)){
-            throw new IllegalArgumentException("Invalid email format: "+email);
+        if (!isValidEmail(email)) {
+            throw new IllegalArgumentException("Invalid email format: " + email);
         }
         this.id = id;
         this.name = name;
@@ -22,18 +21,23 @@ public class Attendee {
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -61,13 +65,10 @@ public class Attendee {
                 ", email='" + email + '\'' +
                 '}';
     }
-
     public boolean isValidEmail(String email) {
         String regex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
-
 }

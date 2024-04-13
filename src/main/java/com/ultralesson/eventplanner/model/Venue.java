@@ -9,6 +9,9 @@ public class Venue {
     private int capacity;
 
     public Venue(int id, String name, String address, int capacity) {
+        if (capacity < 0) {
+            throw new IllegalArgumentException("Capacity cannot be negative");
+        }
         this.id = id;
         this.name = name;
         this.address = address;
@@ -47,8 +50,6 @@ public class Venue {
         this.capacity = capacity;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,4 +76,3 @@ public class Venue {
                 '}';
     }
 }
-

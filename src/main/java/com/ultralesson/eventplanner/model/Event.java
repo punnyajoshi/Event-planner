@@ -11,17 +11,23 @@ public class Event {
 
     private Venue venue;
 
-    public Event(int id, String testEvent, String description, Venue actualVenue) {
+    public Event(int id, String name, String description, Venue venue) {
         if (name == null) {
             throw new IllegalArgumentException("Event name cannot be null.");
+        }
+        if (description== null) {
+            throw new IllegalArgumentException("Event description cannot be null.");
+        }
+        if (venue== null) {
+            throw new IllegalArgumentException("Event venue cannot be null.");
         }
         this.id = id;
         this.name = name;
         this.description = description;
         this.attendees = new ArrayList<>();
         this.venue = venue;
-
     }
+
 
     public int getId() {
         return id;
@@ -58,8 +64,4 @@ public class Event {
     public void addAttendees(List<Attendee> newAttendees) {
         attendees.addAll(newAttendees);
     }
-
 }
-
-
-
