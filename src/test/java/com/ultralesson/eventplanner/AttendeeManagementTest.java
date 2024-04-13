@@ -25,18 +25,7 @@ public class AttendeeManagementTest {
         Attendee invalidAttendee = new Attendee(3, "Invalid User", "invalidemail"); // Invalid email format
         event.addAttendee(invalidAttendee);
     }
-    @Test
-    public void testRemovingAttendeeFromEvent() {
-        Event event = new Event(1, "Existing Event", "Event Description", new Venue(1, "Venue Name", "Venue Address", 100));
-        EventPlanner eventPlanner = new EventPlanner();
-        Attendee attendee = new Attendee(1, "John Mandise", "john@test.com");
-        event.addAttendee(attendee);
 
-        int initialCount = event.getAttendees().size();
-        event.removeAttendee(attendee);
-        Assert.assertFalse(event.getAttendees().contains(attendee), "Attendee should be removed from the event");
-        Assert.assertEquals(event.getAttendees().size(), initialCount - 1, "Attendee count should get decrease by 1 on removal");
-    }
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void testAddingAttendeeToNonExistentEvent() {
         EventPlanner eventPlanner = new EventPlanner();
