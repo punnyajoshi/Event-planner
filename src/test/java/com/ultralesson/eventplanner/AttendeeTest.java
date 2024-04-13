@@ -8,29 +8,29 @@ import org.testng.annotations.Test;
 
 public class AttendeeTest {
     private Attendee attendee;
-    //attendee = new Attendee(1, "khushi", "invalid email");
+    //attendee = new Attendee(1, "Punnya", "invalid email");
     @BeforeMethod
     public void setup(){
-        attendee = new Attendee(1, "Khushi", "agrawal@123");
+        attendee = new Attendee(1, "Punnya", "punnyajoshi@gmail.com");
 
     }
     @Test(groups = {"creation", "attendeeCreation"}, priority = 1)
     public void testAttendeeCreation(){
-        Attendee attendee = new Attendee(1, "Khushi", "agrawal@123");
-        Assert.assertEquals(attendee.getName(), "Khushi");
-        Assert.assertEquals(attendee.getEmail(), "agrawal@123");
+        Attendee attendee = new Attendee(1, "Punnya", "punnyajoshi@gmail.com");
+        Assert.assertEquals(attendee.getName(), "Punnya");
+        Assert.assertEquals(attendee.getEmail(), "punnyajoshi@gmail.com");
         Assert.assertEquals(attendee.getId(), 1);
     }
     @Test
     public void testAttendeeProperties(){
         Assert.assertEquals(attendee.getId(), 1, "Attendee ID doesn't match");
-        Assert.assertEquals(attendee.getName(), "Khushi", "Attendee Name doesn't match");
-        Assert.assertEquals(attendee.getEmail(), "agrawal@123", "Attendee Email doesn't match");
+        Assert.assertEquals(attendee.getName(), "Punnya", "Attendee Name doesn't match");
+        Assert.assertEquals(attendee.getEmail(), "punnyajoshi@gmail.com", "Attendee Email doesn't match");
     }
     /* @Test
      public void testAttendeeEmailValidation(){
 
-         attendee=new Attendee(1, "khushi", "valid_email");
+         attendee=new Attendee(1, "Punnya", "valid_email");
      }*/
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void shouldThrowExceptionForInvalidEmail(){

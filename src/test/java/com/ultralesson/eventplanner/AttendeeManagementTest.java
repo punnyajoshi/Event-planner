@@ -27,6 +27,7 @@ public class AttendeeManagementTest {
     @Test
     public void testRemovingAttendeeFromEvent() {
         Event event = new Event(1, "Existing Event", "Event Description", new Venue(1, "Venue Name", "Venue Address", 100));
+        EventPlanner eventPlanner = new EventPlanner();
         Attendee attendee = new Attendee(1, "John Mandise", "john@test.com");
         event.addAttendee(attendee);
 
@@ -45,5 +46,11 @@ public class AttendeeManagementTest {
         eventPlanner.addAttendee(attendee); // Expecting an exception due to non-existent event
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testEmptyEmailAttendeeAddition() {
+        Event event = new Event(1, "Test Event", "Test Description", new Venue(1, "Test Venue", "Test Address", 100));
+        Attendee invalidAttendee = new Attendee(10, "Test Name", ""); // Empty email
+        event.addAttendee(invalidAttendee);
+    }
 
 }
