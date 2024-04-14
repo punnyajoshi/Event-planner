@@ -7,6 +7,10 @@
                 <include name="attendeeCreation"/>
                 <include name="venueCreation"/>
                 <include name="eventCreation"/>
+                <include name="attendee.addition" />
+                <include name="attendee.removal" />
+                <!-- Exclude attendee.validation group as an example -->
+                <exclude name="attendee.validation" />
             </run>
         </groups>
         <classes>
