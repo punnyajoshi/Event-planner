@@ -6,6 +6,7 @@ import com.ultralesson.eventplanner.service.EventPlanner;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class EventTest {
@@ -77,5 +78,32 @@ public class EventTest {
     public void tearDownClass(){
         System.out.println("Cleaning up resources for event class...");
 
+    }
+
+    @DataProvider(name = "eventDataProvider")
+    public Object[][] provideEventData() {
+        Venue validVenue = new Venue(1, "Conference Hall", "123 Main St", 300);
+        return new Object[][] {
+                // Valid data
+                {1, "Tech Conference", "Tech Conference Description", validVenue, true},
+                // Edge case: Very long event name
+                {2, "This is a very long event name that might cause issues in some systems...", "Long name description", validVenue, true},
+                // Invalid data: Event with null name
+                {3, null, "Event with null name", validVenue, false},
+                // Invalid data: Event with empty description
+                {4, "Empty Description Event", "", validVenue, false},
+                // Invalid data: Event with invalid venue (null)
+                {5, "Invalid Venue Event", "Description", null, false},
+        };
+    }
+
+    @Test(dataProvider = "eventDataProvider", groups = {"creation"})
+    public void testEventCreationWithDataProvider(Integer id, String name, String description, Venue venue, Boolean expectedSuccess) {
+        try {
+            Event event = new Event(id, name, description, venue);
+            Assert.assertTrue(expectedSuccess, "Event creation should succeed for valid data");
+        } catch (IllegalArgumentException e) {
+            Assert.assertFalse(expectedSuccess, "Event creation should fail for invalid data");
+        }
     }
 }

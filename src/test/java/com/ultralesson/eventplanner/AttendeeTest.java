@@ -21,11 +21,12 @@ public class AttendeeTest {
         Assert.assertEquals(attendee.getEmail(), "punnyajoshi@gmail.com");
         Assert.assertEquals(attendee.getId(), 1);
     }
-    @Test
-    public void testAttendeeProperties(){
-        Assert.assertEquals(attendee.getId(), 1, "Attendee ID doesn't match");
-        Assert.assertEquals(attendee.getName(), "Punnya", "Attendee Name doesn't match");
-        Assert.assertEquals(attendee.getEmail(), "punnyajoshi@gmail.com", "Attendee Email doesn't match");
+    @Test(groups = {"validation"})
+    public void testAttendeeProperties() {
+        Attendee attendee = new Attendee(1, "John Doe", "john.doe@example.com");
+        Assert.assertEquals(attendee.getId(), 1, "The id should match the one provided");
+        Assert.assertEquals(attendee.getName(), "John Doe", "The name should match the one provided");
+        Assert.assertEquals(attendee.getEmail(), "john.doe@example.com", "The email should match the one provided");
     }
     /* @Test
      public void testAttendeeEmailValidation(){
