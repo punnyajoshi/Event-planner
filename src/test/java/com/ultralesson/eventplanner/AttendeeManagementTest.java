@@ -8,7 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AttendeeManagementTest {
-    @Test
+    @Test(groups = {"attendee.adding"}, description = "Adds valid attendee to the event")
     public void testAddingAttendeeToEvent()
     {
         Event event = new Event(1, "Adding new Event", "Connect with Testers", new Venue(1, "Conference Hall A", "123 Business Rd.", 150));
@@ -18,13 +18,13 @@ public class AttendeeManagementTest {
         Assert.assertTrue(event.getAttendees().contains(newAttendee), "The new attendee should be added to the event.");
         Assert.assertEquals(event.getAttendees().size(), initialAttendeeCount + 1, "Attendee count should be increased by one.");
     }
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class, groups = {"attendee.adding"}, description = "Checks for invalid attendee addition")
     public void testAddingInvalidAttendee() {
         Event event = new Event(1, "Adding new Event", "Connect with Testers", new Venue(1, "Conference Hall A", "123 Business Rd.", 150));
         Attendee invalidAttendee = new Attendee(3, "Invalid User", "invalidemail"); // Invalid email format
         event.addAttendee(invalidAttendee);
     }
-    @Test
+    @Test(groups = {"attendee.removing"}, description = "Removes an existing attendee for the event")
     public void testRemovingAttendeeFromEvent() {
         Event event = new Event(1, "Existing Event", "Event Description", new Venue(1, "Venue Name", "Venue Address", 100));
         Attendee attendee = new Attendee(1, "John Mandise", "john@test.com");
@@ -35,7 +35,7 @@ public class AttendeeManagementTest {
         Assert.assertFalse(event.getAttendees().contains(attendee), "Attendee should be removed from the event");
         Assert.assertEquals(event.getAttendees().size(), initialCount - 1, "Attendee count should get decrease by 1 on removal");
     }
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class, groups = {"attendee.adding"}, description = "Checks for adding attendee in a non existing event")
     public void testAddingAttendeeToNonExistentEvent() {
         EventPlanner eventPlanner = new EventPlanner();
         Attendee attendee = new Attendee(4, "Alexa", "alexa@example.com");
