@@ -8,7 +8,6 @@ import com.ultralesson.eventplanner.model.Venue;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class EventPlanner {
     private List<Event> events;
@@ -35,20 +34,36 @@ public class EventPlanner {
         attendees.add(attendee);
     }
 
-
     public void scheduleEvent(Event event, Venue venue, LocalDateTime startTime, LocalDateTime endTime) {
+        if (startTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Start time cannot be in the past.");
+        }
+        if (startTime.isBefore(LocalDateTime.now())) {
+            throw new IllegalArgumentException("Start time cannot be in the past.");
+        }
+        // Check for overlapping schedules
+        for (Schedule existingSchedule : schedules) {
+            LocalDateTime existingStartTime = existingSchedule.getStartTime();
+            LocalDateTime existingEndTime = existingSchedule.getEndTime();
+
+            // Check if the new event's start time falls within the existing schedule
+            if ((startTime.isAfter(existingStartTime) || startTime.isEqual(existingStartTime)) && startTime.isBefore(existingEndTime)) {
+                throw new IllegalArgumentException("Overlapping schedule detected.");
+            }
+
+            // Check if the new event's end time falls within the existing schedule
+            if ((endTime.isAfter(existingStartTime)) && (endTime.isBefore(existingEndTime) || endTime.isEqual(existingEndTime))) {
+                throw new IllegalArgumentException("Overlapping schedule detected.");
+            }
+
+            // Check if the existing schedule falls within the new event's time frame
+            if ((existingStartTime.isAfter(startTime) || existingStartTime.isEqual(startTime)) && existingStartTime.isBefore(endTime)) {
+                throw new IllegalArgumentException("Overlapping schedule detected.");
+            }
+        }
         int scheduleId = schedules.size() + 1;
         Schedule schedule = new Schedule(scheduleId, event, venue, startTime, endTime);
         schedules.add(schedule);
-    }
-
-    public void addAttendeeToEvent(Event event, Attendee attendee) {
-        Objects.requireNonNull(event, "Event cannot be null");
-        Objects.requireNonNull(attendee, "Attendee cannot be null");
-        if(!events.contains(event)) {
-            throw new IllegalArgumentException("Event does not exist in the planner");
-        }
-        event.addAttendee(attendee);
     }
 
     public void updateEvent(Event updatedEvent) {
@@ -63,6 +78,10 @@ public class EventPlanner {
     public void cancelEvent(int eventId) {
         events.removeIf(event -> event.getId() == eventId);
         schedules.removeIf(schedule -> schedule.getEvent().getId() == eventId);
+    }
+    public void removeVenue(int venueId) {
+        venues.removeIf(venue -> venue.getId() == venueId);
+        schedules.removeIf(schedule -> schedule.getVenue().getId() == venueId);
     }
 
     public void deleteEvent(int eventId) {

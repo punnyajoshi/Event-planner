@@ -11,6 +11,9 @@ public class Schedule {
     private LocalDateTime endTime;
 
     public Schedule(int id, Event event, Venue venue, LocalDateTime startTime, LocalDateTime endTime) {
+        if (!isValidstartTime(startTime)) {
+            throw new IllegalArgumentException("Invalid time format: " + startTime);
+        }
         this.id = id;
         this.event = event;
         this.venue = venue;
@@ -85,13 +88,9 @@ public class Schedule {
                 ", endTime=" + endTime +
                 '}';
     }
-
     public boolean isValidstartTime(LocalDateTime startTime){
-        //String regex = "^\\\\d{4}-\\\\d{2}-\\\\d{2}T\\\\d{2}:\\\\d{2}:\\\\d{2}(\\\\.\\\\d+)?$";
         String stringStartTime=startTime.toString();
-        //Pattern pattern = Pattern.compile(regex);
-        // Matcher matcher = pattern.matcher(stringStartTime);
         return true;
     }
-}
 
+}

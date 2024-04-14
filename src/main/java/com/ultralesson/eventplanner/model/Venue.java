@@ -12,6 +12,7 @@ public class Venue {
         if (capacity < 0) {
             throw new IllegalArgumentException("Capacity cannot be negative");
         }
+
         this.id = id;
         this.name = name;
         this.address = address;

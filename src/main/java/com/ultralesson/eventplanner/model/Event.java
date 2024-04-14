@@ -30,38 +30,47 @@ public class Event {
 
 
     public int getId() {
+
         return id;
     }
 
     public String getName() {
+
         return name;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public List<Attendee> getAttendees() {
+
         return attendees;
     }
 
     public void addAttendee(Attendee attendee) {
+
         attendees.add(attendee);
     }
 
     public void removeAttendee(Attendee attendee) {
+
         attendees.remove(attendee);
     }
 
     public Venue getVenue() {
+
         return venue;
     }
 
     public void setVenue(Venue venue) {
+
         this.venue = venue;
     }
 
     public void addAttendees(List<Attendee> newAttendees) {
+
         attendees.addAll(newAttendees);
     }
 }

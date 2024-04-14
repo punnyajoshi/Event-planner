@@ -34,6 +34,7 @@ public class AttendeeTest {
      }*/
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void shouldThrowExceptionForInvalidEmail(){
+
         attendee=new Attendee(1, "new attendee", "google.com");
     }
     @AfterMethod
